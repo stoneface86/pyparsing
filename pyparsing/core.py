@@ -3704,14 +3704,14 @@ class QuotedString(Token):
         quote_char = quoteChar or quote_char
 
         # remove white space from quote chars
-        quote_char = quote_char.strip()
+        quote_char = quote_char.strip(" \t")
         if not quote_char:
             raise ValueError("quote_char cannot be the empty string")
 
         if end_quote_char is None:
             end_quote_char = quote_char
         else:
-            end_quote_char = end_quote_char.strip()
+            end_quote_char = end_quote_char.strip(" \t")
             if not end_quote_char:
                 raise ValueError("end_quote_char cannot be the empty string")
 
