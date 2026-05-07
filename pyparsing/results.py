@@ -663,7 +663,14 @@ class ParseResults:
             else:
                 return obj
 
-        return dict((k, to_item(v)) for k, v in self.items())
+        # Before: return dict((k, to_item(v)) for k, v in self.items())
+        return_dict = dict((k, to_item(v)) for k, v in self.items())
+        if len(return_dict) == 1:
+            key = list(return_dict.keys())[0]
+            if return_dict[key] == []:
+                # Fix to avoid making dictionary items be empty lists
+                return_dict[key] = {}
+        return return_dict
 
     def copy(self) -> ParseResults:
         """
